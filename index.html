@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Petite Vue Example</title>
+<script src="https://unpkg.com/vue@latest"></script>
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+
+<body id='app'>
+  <div id="request">
+    <div class="flex flex-col items-center justify-center mt-10 w-full">
+      <h3 class="text-2xl bold">Bored?</h3>
+      <form @submit.prevent="store.getActivity">
+        <!-- <input v-model="store.searchText" type="text" class="border-2 mt-4 p-4 shadow" /> -->
+        <button type="submit" class="
+        bg-purple-100 font-bold mt-4 p-3 rounded shadow text-2xl uppercase"> Try this...</button>
+      </form>
+    </div>
+    <div class="" v-if="store.results">
+      <div class="
+      mx-auto
+      flex flex-col
+      shadow
+      border-2
+      p-5
+      transition
+      duration-500
+      ease-in-out
+
+      transform
+      hover:-translate-y-1 hover:scale-10">
+        <h3 class="font-bold text-black">{{store.results.activity}} ({{store.results.key}})</h3>
+        <!-- <span class="mt-4 flex" v-html="store.getImgByType(store.results.type)"></span>
+        <span >{{store.getImgByType(store.results.type)}}</span> -->
+        <div class="type">Type: {{store.results.type}}</div>
+        <div class="paryticipants">Participants: {{store.results.participants}}</div>
+        <div class="price">Price (% of your budget): {{store.results.price * 100}}%</div>
+        <div class="text-blue-700">Start here: <a :href="store.results.link" target="_blank">{{store.results.link}}</a></div>
+        <div class="accessibility">Accessibility: {{store.results.accessibility * 100}}%</div>
+
+        <!-- <pre>{{ store.results }}</pre>
+
+        <span id='participants' class="mt-4 flex border-4" v-for="i in store.results.participants" :key="i"
+          >{{store.getImgByType('participants')}} -->
+        </span>
+      </div>
+    </div>
+  </div>
+  </div>
+</body>
+<script type="module">
+  import { createApp, reactive } from "https://unpkg.com/petite-vue?module";
+
+  const store = reactive( {
+    results: null,
+    getImgByType( type ) {
+      console.log( type )
+      switch ( type ) {
+        case 'education':
+          return '<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" /></svg>'
+          break;
+        case "social":
+          return '<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" /></svg>'
+          break
+        case "participants":
+          return '<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" /></svg>'
+          break;
+        case 'relaxation':
+
+          break;
+        case '':
+          break
+        default:
+          break;
+      }
+    },
+    async getActivity() {
+      const activity = await fetch(
+        `http://www.boredapi.com/api/activity/`
+      );
+      const res = await activity.json();
+      console.log( res )
+      this.results = res
+    }
+  } );
+  createApp( { store } ).mount( '#app' );
+</script>
+
+</html>
