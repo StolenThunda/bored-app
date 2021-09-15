@@ -6,9 +6,32 @@
 <title>Petite Vue Example</title>
 <script src="https://unpkg.com/vue@latest"></script>
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+<link href="./css/index.css" rel="stylesheet" />
+<script src="scripts/navbar.js"></script>
 </head>
 
 <body id='app' class="bg-purple-200">
+  <div id="mySidenav" class="sidenav-container">
+  
+    <span class="drawer-close-button">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    </span>
+  
+    <a href="#home" onclick="closeNav()" id="home-link">Home</a>
+    <a href="#about" onclick="closeNav()" id="about-link">About Me</a>
+    <a href="#works" onclick="closeNav()" id="works-link">My WorkS</a>
+    <a href="#contact" onclick="closeNav()" id="contact-link">Contact Me</a>
+  
+  </div>
+  
+  
+  <div class="backdrop-container" id="backdrop"></div>
+  
+  
+  <nav>
+  
+    <span onclick="openNav()" class="mobile-nav-open-icon">&#9776;</span>
+  </nav>
   <form @submit.prevent="store.getActivity">
     <div id="request">
       <div class="flex flex-col items-center justify-center mt-10 w-full">
