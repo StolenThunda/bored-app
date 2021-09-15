@@ -4,10 +4,7 @@ const store = reactive( {
   results: null,
   getIconColor (cost, index) {
     const val = (cost * 10) / 2;
-    const iconColor = index <= val ? 'text-green-500' : 'text-gray-300'
-
-    console.log( iconColor )
-    return iconColor
+    return index <= val ? 'text-green-500' : 'text-gray-300'
   },
   getImgByType ( type ) {
     console.log( type )
@@ -39,7 +36,7 @@ const store = reactive( {
   },
   async getActivity () {
     const activity = await fetch(
-      `http://www.boredapi.com/api/activity/`
+      `http://www.boredapi.com/api/activity`
     );
     const res = await activity.json();
     console.log( res )
