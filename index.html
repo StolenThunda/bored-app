@@ -21,6 +21,12 @@
             shadow-inner
             uppercase"> Try this...
         </button>
+        <details  class="p-5 form-wrapper" id="edit-advanced">
+          <summary>Advanced settings</summary>
+          <div class="details-wrapper">
+            <div class="details-description">Lorem ipsum.</div>
+          </div>
+        </details>
       </div>
     </div>
   </form>
@@ -213,7 +219,7 @@
         <div class="text-semibold text-2xl">|</div>
         <div class="flex items-center uppercase text-xs font-semibold">
           Participants: {{store.results.participants}}
-          <div class="mx-1">
+          <div class="px-3 my-3">
             <div v-if="store.results.participants > 1">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" class="w-4 h-4" fill="currentColor">
                 <title>Users SVG icon</title>
